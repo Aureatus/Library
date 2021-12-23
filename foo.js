@@ -1,96 +1,135 @@
-// HTML + CSS variables 
-const Body = document.body
-const container = Body.querySelector("container")
-const tableBody = Body.querySelector("tbody")
-const bookAddForm = document.getElementById("bookAddForm")
-const newBookButton = document.getElementById("newBook")
 const newBookDialog = document.getElementById("bookAdd")
-
-/* Variable declarations */
-let myLibrary = [];
-
-/* Function declarations */
-function Book(title,author,pages,read) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-    this.readStatus = function() {
-        return read = !read
-    }
-}
-
-
-function addBookToLibrary(title,author,pages,read,) {
-    let bookToAdd  = new Book(title,author,pages,read)
-    myLibrary.push(bookToAdd)
-}
-
-function libraryDisplayer() {
-    for (bookToAdd in myLibrary) {
-        tableBody.insertRow(bookToAdd)
-        for(let i = 0; i < 4; i++) {
-            tableBody.rows[bookToAdd].insertCell(i)
+class Book {
+    constructor(title,author,pages,read) {
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.read = read
+        this.readStatus = function() {
+            return read = !read
         }
-        const deleteButtonCreation = document.createElement("button")
-        deleteButtonCreation.textContent = "Delete"
-        deleteButtonCreation.id = "del-button"
-        deleteButtonCreation.dataset.libraryIndex = bookToAdd
-        tableBody.rows[bookToAdd].appendChild(deleteButtonCreation)
-        deleteButtonCreation.addEventListener("click", deleteButton)
-        const readToggleButtonCreation = document.createElement("button")
-        readToggleButtonCreation.textContent = "Read-toggle"
-        readToggleButtonCreation.id = "read-change"
-        readToggleButtonCreation.dataset.readToggle = bookToAdd
-        tableBody.rows[bookToAdd].appendChild(readToggleButtonCreation)
-        readToggleButtonCreation.addEventListener("click", readToggleButton)
-        tableBody.rows[bookToAdd].cells[0].textContent = myLibrary[bookToAdd].title
-        tableBody.rows[bookToAdd].cells[1].textContent = myLibrary[bookToAdd].author
-        tableBody.rows[bookToAdd].cells[2].textContent = myLibrary[bookToAdd].pages
-        tableBody.rows[bookToAdd].cells[3].textContent = myLibrary[bookToAdd].read
     }
 }
 
-newBookButton.addEventListener("click" , onOpen)
-function onOpen() {
-    newBookDialog.showModal();
-}
-newBookDialog.addEventListener("submit", bookAdder)
+class Library {
+    constructor() {
+        this.books = []
+    }
 
-function bookAdder() {
-    let title = document.querySelector("#Title").value
-    let author = document.querySelector("#Author").value
-    let pages = document.querySelector("#Pages").value
-    let read = document.querySelector("input[type=radio]:checked").value
-    if (read === "true") {
-        read = true
+    addBook(title,author,pages,read) {
+        let bookToAdd = new Book(title,author,pages,read)
+        library.books.push(bookToAdd)
     }
-    else if (read === "false") {
-        read = false
+
+    deleteBook(title,author,pages,read) {
+        let bookToRemove = new Book(title,author,pages,read)
+        let index = library.books.findIndex(Book => Book === bookToRemove)
+        library.books.splice(index)
     }
-    let rowCount = tableBody.rows.length;
-    for (let i = rowCount-1; i >= 0; i--) {
-        tableBody.deleteRow(i);
-    }
-    addBookToLibrary(title,author,pages,read)
-    libraryDisplayer()
 }
 
-function deleteButton() {
-    let rowCount = tableBody.rows.length;
-    for (let i = rowCount-1; i >= 0; i--) {
-        tableBody.deleteRow(i);
+const library = new Library()
+
+class displayController {
+    constructor() {
+
     }
-    myLibrary.splice([this.dataset.libraryIndex],1)
-    libraryDisplayer()
+    
+
+    onOpen() {
+        const newBookDialog = document.getElementById("bookAdd")
+        const bookAddForm = document.getElementById("bookAddForm")
+        newBookDialog.showModal();
+    }
+    
+    newBookEventListener() {
+        const newBookButton = document.getElementById("newBook")
+        newBookButton.addEventListener("click" , this.onOpen)
+    }
+
+    
+    libraryDisplayer() {
+        const Body = document.body
+        const tableBody = Body.querySelector("tbody")
+        for (let item in library.books) {
+            tableBody.insertRow(item)
+            for(let i = 0; i < 4; i++) {
+                tableBody.rows[item].insertCell(i)
+            }
+
+            const deleteButtonCreation = document.createElement("button")
+            deleteButtonCreation.textContent = "Delete"
+            deleteButtonCreation.id = "del-button"
+            deleteButtonCreation.dataset.libraryIndex = item
+            tableBody.rows[item].appendChild(deleteButtonCreation)
+            deleteButtonCreation.addEventListener("click", (evt) => {
+                this.deleteButton(evt.target)
+            })
+
+            const readToggleButtonCreation = document.createElement("button")
+            readToggleButtonCreation.textContent = "Read-toggle"
+            readToggleButtonCreation.id = "read-change"
+            readToggleButtonCreation.dataset.readToggle = item
+            tableBody.rows[item].appendChild(readToggleButtonCreation)
+            readToggleButtonCreation.addEventListener("click", (evt) => {this.readToggle(evt.target)})
+
+            tableBody.rows[item].cells[0].textContent = library.books[item].title
+            tableBody.rows[item].cells[1].textContent = library.books[item].author
+            tableBody.rows[item].cells[2].textContent = library.books[item].pages
+            tableBody.rows[item].cells[3].textContent = library.books[item].read
+        }
+    }
+
+    deleteButton(input) {
+        const Body = document.body
+        const tableBody = Body.querySelector("tbody")
+        let rowCount = tableBody.rows.length;
+        for (let i = rowCount-1; i >= 0; i--) {
+            tableBody.deleteRow(i);
+        }
+        let index = input.dataset.libraryIndex
+        library.deleteBook(library.books[index].title,library.books[index].author,library.books[index].pages,library.books[index].read)
+        this.libraryDisplayer()
+    }
+    newBook() {
+        let title = document.querySelector("#Title").value
+        let author = document.querySelector("#Author").value
+        let pages = document.querySelector("#Pages").value
+        let read = document.querySelector("input[type=radio]:checked").value
+        if (read === "true") {
+            read = true
+        }
+        else if (read === "false") {
+            read = false
+        }
+        const Body = document.body
+        const tableBody = Body.querySelector("tbody")
+        let rowCount = tableBody.rows.length;
+        for (let i = rowCount-1; i >= 0; i--) {
+            tableBody.deleteRow(i);
+        }
+        library.addBook(title,author,pages,read)
+    }
+
+    readToggle(input) {
+        const Body = document.body
+        const tableBody = Body.querySelector("tbody")
+        let index = input.dataset.readToggle
+        console.log(index)
+        library.books[index].read = library.books[index].readStatus()
+        let rowCount = tableBody.rows.length;
+        for (let i = rowCount-1; i >= 0; i--) {
+            tableBody.deleteRow(i);
+        }
+        this.libraryDisplayer()
+        
+    }
 }
 
-function readToggleButton() {
-    let rowCount = tableBody.rows.length;
-    for (let i = rowCount-1; i >= 0; i--) {
-        tableBody.deleteRow(i);
-    }
-    myLibrary[this.dataset.readToggle].read = myLibrary[this.dataset.readToggle].readStatus()
-    console.log(myLibrary)
-    libraryDisplayer()
-}
+const display = new displayController()
+
+display.newBookEventListener()
+newBookDialog.addEventListener("submit", () => {
+    display.newBook()
+    display.libraryDisplayer()
+})
