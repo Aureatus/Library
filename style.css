@@ -1,79 +1,105 @@
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 100px;
-    align-items: center;
-    background-color: #ff499e;
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+  background-color: #ff499e;
 }
 
 container {
-    background-color: #d264b6;
-    border-style: outset;
-    border-radius: 10px;
-    border-width: 3px;
-    border-color: coral;
-    box-shadow: cornflowerblue 2px 2px;
+  background-color: #d264b6;
+  border-style: outset;
+  border-radius: 10px;
+  border-width: 3px;
+  border-color: coral;
+  box-shadow: cornflowerblue 2px 2px;
 }
 
 h1 {
-    font-size: 40px;
-    text-shadow: azure 2px 2px;
+  font-size: 40px;
+  text-shadow: azure 2px 2px;
 }
 
 table {
-    display: table;
-    text-align: center;
+  display: table;
+  text-align: center;
 }
 
 thead {
-    display: table-header-group;
-    background-color: #a480cf;
-    font-size: 30px;
-    font-weight: bolder;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: table-header-group;
+  background-color: #a480cf;
+  font-size: 30px;
+  font-weight: bolder;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 th {
-    padding: 10px;
-    box-shadow: cornsilk 1.5px 1.5px;
-    border-radius: 5px;
+  padding: 10px;
+  box-shadow: cornsilk 1.5px 1.5px;
+  border-radius: 5px;
 }
 
 tbody {
-    display: table-row-group;
-    
-    font-size: 25px;
-    font-weight: lighter;
-    font-family:monospace;
+  display: table-row-group;
+
+  font-size: 25px;
+  font-weight: lighter;
+  font-family: monospace;
 }
 
 td {
-display: table-cell;
-background-color: #779be7;
-box-shadow: black 2px 2px;
-border-radius: 5px;
+  display: table-cell;
+  background-color: #779be7;
+  box-shadow: black 2px 2px;
+  border-radius: 5px;
 }
 
 button {
-    background-color: #779be7;
-    border-color: azure;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 6px;
-    height: 45px;
-    width: auto;
+  background-color: #779be7;
+  border-color: azure;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 6px;
+  height: 45px;
+  width: auto;
 }
 
 #del-button {
-    background-color: red;
-    border-color: rgb(255, 255, 255);
+  background-color: red;
+  border-color: rgb(255, 255, 255);
 }
 
 #newBook {
-    background-color: rgba(172, 255, 47, 0.705);
-    border-color:ivory;
-    border-width: 4px;
+  background-color: rgba(172, 255, 47, 0.705);
+  border-color: ivory;
+  border-width: 4px;
+}
+
+input:invalid {
+  border-color: #900;
+  background-color: #fdd;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+.error {
+  width: 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
 }
