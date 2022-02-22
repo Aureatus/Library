@@ -26,13 +26,23 @@
         <button id="newBook">NEW BOOK</button>
       </menu>
       <dialog id="bookAdd">
-        <form method="dialog" id="bookAddForm" action="foo.js">
-          <label for="Title">Title:</label>
-          <input type="text" id="Title" />
-          <label for="Author">Author:</label>
-          <input type="text" id="Author" />
-          <label for="Pages">Pages:</label>
-          <input type="number" id="Pages" />
+        <form method="dialog" id="bookAddForm" action="foo.js" novalidate>
+          <label for="Title">
+            <span>Title:</span>
+            <input type="text" id="Title" required />
+            <span class="error" aria-live="polite"></span>
+          </label>
+
+          <label for="Author">
+            <span>Author:</span>
+            <input type="text" id="Author" required />
+            <span class="error" aria-live="polite"></span>
+          </label>
+          <label for="Pages">
+            <span>Pages:</span>
+            <input type="number" id="Pages" required min="0" />
+            <span class="error" aria-live="polite"></span>
+          </label>
           <label for="True">True</label>
           <input type="radio" id="True" value="true" name="Read" checked />
           <label for="False">False</label>
