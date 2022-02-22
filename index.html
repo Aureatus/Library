@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
     <script src="foo.js" defer></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <h1>Library</h1>
     <container>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Pages</th>
-                    <th>Read</th>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-        <menu>
-            <button id="newBook">NEW BOOK</button>
-        </menu>
-        <dialog id="bookAdd">
-            <form method="dialog" id="bookAddForm" action="foo.js">
-                <label for="Title">Title:</label>
-                <input type="text" id="Title">
-                <label for="Author">Author:</label>
-                <input type="text" id="Author">
-                <label for="Pages">Pages:</label>
-                <input type="text" id="Pages">
-                <label for="True">True</label>
-                <input type="radio" id="True" value="true" name="Read" checked>
-                <label for="False">False</label>
-                <input type="radio" id="False" value="false" name="Read">
-                <label for="Submit"></label>
-                <input type="submit" id="Submit" value="Submit">
-            </form>
-        </dialog>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Read</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <menu>
+        <button id="newBook">NEW BOOK</button>
+      </menu>
+      <dialog id="bookAdd">
+        <form method="dialog" id="bookAddForm" action="foo.js">
+          <label for="Title">Title:</label>
+          <input type="text" id="Title" />
+          <label for="Author">Author:</label>
+          <input type="text" id="Author" />
+          <label for="Pages">Pages:</label>
+          <input type="number" id="Pages" />
+          <label for="True">True</label>
+          <input type="radio" id="True" value="true" name="Read" checked />
+          <label for="False">False</label>
+          <input type="radio" id="False" value="false" name="Read" />
+          <label for="Submit"></label>
+          <input type="submit" id="Submit" value="Submit" />
+        </form>
+      </dialog>
     </container>
-</body>
+  </body>
 </html>
